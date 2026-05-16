@@ -6,5 +6,5 @@ sources:
     schema: TPCH_SF1
 
     tables:
-      - name: CUSTOMER
+      - name: customer
         description: Customer master data from Snowflake sample dataset.

@@ -1,6 +1,6 @@
 WITH source_customer AS (
     SELECT * 
-    FROM {{ source('snowflake_sample_data', 'CUSTOMER') }}
+    FROM {{ source('snowflake_sample_data', 'customer') }}
 )
 , final AS (
     SELECT 
