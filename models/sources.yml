@@ -8,3 +8,17 @@ sources:
     tables:
       - name: customer
         description: Customer master data from Snowflake sample dataset.
+      - name: lineitem
+        description: line item data from Snowflake sample dataset.
+      - name: nation
+        description: nation data from Snowflake sample dataset.
+      - name: orders
+        description: orders data from Snowflake sample dataset.
+      - name: part
+        description: part data from Snowflake sample dataset.
+      - name: partsupp
+        description: partsupp supplier data from Snowflake sample dataset.
+      - name: region
+        description: region data from Snowflake sample dataset.
+      - name: supplier
+        description: supplier data from Snowflake sample dataset.
