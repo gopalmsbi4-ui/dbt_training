@@ -1,0 +1,108 @@
+version: 2
+
+models:
+  - name: stg_lineitem
+    description: |
+      Staging layer for line item data from the Snowflake sample dataset.
+      This model extracts and selects detailed order line item information from the source 
+      lineitem table, preparing it for downstream transformations and mart analysis.
+    
+    columns:
+      - name: l_orderkey
+        description: Foreign key reference to the order
+        data_type: number
+        data_tests:
+          - not_null
+        relationships:
+          - to: ref('stg_orders')
+            field: o_orderkey
+      
+      - name: l_partkey
+        description: Foreign key reference to the part
+        data_type: number
+        data_tests:
+          - not_null
+        relationships:
+          - to: ref('stg_part')
+            field: p_partkey
+      
+      - name: l_suppkey
+        description: Foreign key reference to the supplier
+        data_type: number
+        data_tests:
+          - not_null
+        relationships:
+          - to: ref('stg_supplier')
+            field: s_suppkey
+      
+      - name: l_linenumber
+        description: Line number within the order (sequence indicator)
+        data_type: number
+        data_tests:
+          - not_null
+      
+      - name: l_quantity
+        description: Quantity of items ordered on this line
+        data_type: number
+        data_tests:
+          - not_null
+      
+      - name: l_extendedprice
+        description: Extended price (unit price * quantity)
+        data_type: number
+        data_tests:
+          - not_null
+      
+      - name: l_discount
+        description: Discount percentage applied to this line item (0-1 scale)
+        data_type: number
+      
+      - name: l_tax
+        description: Tax percentage applied to this line item (0-1 scale)
+        data_type: number
+      
+      - name: l_returnflag
+        description: |
+          Return flag indicating whether the item has been returned
+          Possible values: R (Returned), N (Not Returned)
+        data_type: varchar
+      
+      - name: l_linestatus
+        description: |
+          Current status of the line item
+          Possible values: O (On Order), F (Fulfilled)
+        data_type: varchar
+      
+      - name: l_shipdate
+        description: Date the line item was shipped
+        data_type: date
+        data_tests:
+          - not_null
+      
+      - name: l_commitdate
+        description: Committed delivery date for the line item
+        data_type: date
+        data_tests:
+          - not_null
+      
+      - name: l_receiptdate
+        description: Date the line item was received by the customer
+        data_type: date
+        data_tests:
+          - not_null
+      
+      - name: l_shipinstruct
+        description: |
+          Shipping instructions for the line item
+          Possible values: NONE, TAKE BACK, DELIVER IN PERSON
+        data_type: varchar
+      
+      - name: l_shipmode
+        description: |
+          Shipping mode for the line item
+          Possible values: AIR, FOB, HAND, MAIL, RAIL, REG AIR, SHIP
+        data_type: varchar
+      
+      - name: l_comment
+        description: Additional comments or notes about the line item
+        data_type: varchar

@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: |
+      Staging layer for customer data from the Snowflake sample dataset.
+      This model extracts and selects key customer information from the source 
+      customer table, preparing it for downstream transformations and analysis.
+    
+    columns:
+      - name: c_custkey
+        description: Unique customer identifier
+        data_type: number
+        data_tests:
+          - unique
+          - not_null
+      
+      - name: c_name
+        description: Customer name
+        data_type: varchar
+        data_tests:
+          - not_null
+      
+      - name: c_address
+        description: Customer street address
+        data_type: varchar
+      
+      - name: c_nationkey
+        description: Foreign key reference to the nation table
+        data_type: number
+        relationships:
+          - to: ref('stg_nation')
+            field: n_nationkey
+      
+      - name: c_phone
+        description: Customer phone number
+        data_type: varchar
+      
+      - name: c_acctbal
+        description: Account balance of the customer
+        data_type: number
+      
+      - name: c_mktsegment
+        description: |
+          Market segment classification for the customer
+          Possible values: AUTOMOBILE, BUILDING, FURNITURE, HOUSEHOLD, MACHINERY
+        data_type: varchar
+      
+      - name: c_comment
+        description: Additional comments or notes about the customer
+        data_type: varchar
