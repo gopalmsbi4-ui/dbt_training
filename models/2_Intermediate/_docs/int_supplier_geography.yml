@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: int_supplier_geography
+    description: "Intermediate model mapping suppliers to geographic attributes (region, country, city)."
+    config:
+      tags: ['geography']
+    columns:
+      - name: s_suppkey
+        description: "Primary supplier identifier (from `stg_supplier`)."
+        tests:
+          - not_null
+          - unique
+      - name: supplier_name
+        description: "Name of the supplier."
+      - name: country
+        description: "Supplier country name or code."
+      - name: region
+        description: "Region/state/province for the supplier."
+      - name: city
+        description: "Supplier city."
+      - name: postal_code
+        description: "Postal or ZIP code, if available."
+      - name: latitude
+        description: "Latitude of supplier's location (optional)."
+      - name: longitude
+        description: "Longitude of supplier's location (optional)."
+
+# Notes:
+# - Verify column names match the compiled model exactly and update descriptions.
+# - Add or remove `tests` entries according to your data quality rules.
+# - After updating, run `dbt docs generate` to refresh documentation.

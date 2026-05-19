@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: int_customer_geography
+    description: "Intermediate model mapping customers to geographic attributes (region, country, city)."
+    config:
+      tags: ['geography']
+    columns:
+      - name: c_custkey
+        description: "Primary customer identifier (from `stg_customers`)."
+        tests:
+          - not_null
+          - unique
+      - name: country
+        description: "Customer country name or code."
+      - name: region
+        description: "Region/state/province for the customer."
+      - name: city
+        description: "Customer city."
+      - name: postal_code
+        description: "Postal or ZIP code, if available."
+      - name: latitude
+        description: "Latitude of customer's location (optional)."
+      - name: longitude
+        description: "Longitude of customer's location (optional)."
+
+# Notes:
+# - Update column names/descriptions to exactly match the compiled model columns.
+# - Add or remove `tests` entries as appropriate for your data quality rules.
+# - After updating, run `dbt docs generate` to refresh documentation.
