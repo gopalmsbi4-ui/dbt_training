@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Fact table of orders with order details and revenue metrics."
+    columns:
+      - name: o_orderkey
+        description: "Unique order identifier."
+      - name: o_orderdate
+        description: "Date the order was placed."
+      - name: o_orderstatus
+        description: "Current order status."
+      - name: o_totalprice
+        description: "Total order price before revenue adjustments."
+      - name: o_orderpriority
+        description: "Order priority code."
+      - name: o_shippriority
+        description: "Shipping priority."
+      - name: c_custkey
+        description: "Customer identifier for the order."
+      - name: c_name
+        description: "Customer name associated with the order."
+      - name: c_nationkey
+        description: "Customer nation identifier."
+      - name: c_mktsegment
+        description: "Customer market segment."
+      - name: c_acctbal
+        description: "Customer account balance."
+      - name: total_revenue_after_tax
+        description: "Revenue after tax for the order."
+      - name: gross_revenue
+        description: "Gross revenue for the order."
+      - name: discount_amount
+        description: "Discount amount applied to the order."
+      - name: net_revenue
+        description: "Net revenue for the order after discounts and tax."

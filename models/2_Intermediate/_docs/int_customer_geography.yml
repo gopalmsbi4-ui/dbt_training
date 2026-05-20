@@ -6,7 +6,7 @@ models:
     config:
       tags: ['geography']
     columns:
-      - name: c_custkey
+      - name: customer_key
         description: "Primary customer identifier (from `stg_customers`)."
         tests:
           - not_null

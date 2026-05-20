@@ -9,10 +9,9 @@ regions as (
 ),
 final as (
 SELECT
-    s.s_suppkey,
-    s.s_name,
-    s.s_acctbal,
-
+    s.s_suppkey as supplier_key,
+    s.s_name as supplier_name,
+    s.s_acctbal as account_balance,
     n.n_name AS nation_name,
     r.r_name AS region_name
 
