@@ -6,7 +6,7 @@ models:
     config:
       tags: ['geography']
     columns:
-      - name: s_suppkey
+      - name: supplier_key
         description: "Primary supplier identifier (from `stg_supplier`)."
         tests:
           - not_null

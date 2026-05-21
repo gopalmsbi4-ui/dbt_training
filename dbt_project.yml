@@ -33,4 +33,11 @@ models:
   DBT_TRAINING:
     # Config indicated by + and applies to all files under models/example/
     1_Staging:
+      +schema: staging
+      +materialized: view
+    2_Intermediate:
+      +schema: intermediate
+      +materialized: view
+    3_Mart:
+      +schema: mart
       +materialized: table

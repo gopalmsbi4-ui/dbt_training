@@ -10,11 +10,10 @@ regions as (
 final as (
 
 SELECT
-    c.c_custkey,
-    c.c_name,
-    c.c_mktsegment,
-    c.c_acctbal,
-
+    c.c_custkey as customer_key,
+    c.c_name as customer_name,
+    c.c_mktsegment as market_segment,
+    c.c_acctbal as account_balance,
     n.n_name AS nation_name,
     r.r_name AS region_name
 

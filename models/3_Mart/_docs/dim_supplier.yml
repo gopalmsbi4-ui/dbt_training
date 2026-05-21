@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: dim_supplier
+    description: "Supplier dimension model with supplier attributes and geographic hierarchy."
+    columns:
+      - name: supplier_key
+        description: "Unique supplier identifier."
+      - name: supplier_name
+        description: "Supplier name."
+      - name: account_balance
+        description: "Current account balance for the supplier."
+      - name: nation_name
+        description: "Name of the supplier's nation."
+      - name: region_name
+        description: "Name of the supplier's region."
