@@ -48,4 +48,6 @@ LEFT JOIN parts p
 LEFT JOIN suppliers s
     ON l.l_suppkey = s.s_suppkey
 )
-SELECT * FROM final    
+SELECT 
+*
+FROM final
