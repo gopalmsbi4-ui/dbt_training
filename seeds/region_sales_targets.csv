@@ -1,0 +1,6 @@
+region_name,annual_sales_target,growth_target_percent,strategic_region
+AFRICA,50000000,12,Y
+AMERICA,220000000,8,Y
+ASIA,180000000,15,Y
+EUROPE,200000000,10,Y
+MIDDLE EAST,70000000,20,N  
