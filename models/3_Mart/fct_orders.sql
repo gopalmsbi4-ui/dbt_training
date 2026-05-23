@@ -6,6 +6,7 @@ WITH orders AS (
 )
 ,final AS (
     SELECT 
+        {{ generate_order_surrogate_key('o.o_orderkey', 'o.c_custkey') }} AS order_surrogate_key,
         o.o_orderkey,
         o.o_orderdate,
         o.o_orderstatus,
@@ -21,10 +22,16 @@ WITH orders AS (
         r.total_revenue_after_tax,
         r.gross_revenue,
         r.discount_amount,
-        r.net_revenue
+        r.net_revenue,
+        case 
+            when o.o_totalprice >= {{ var("high_price_threshold") }} then 'High Value'
+            else 'Regular Value'
+            end as order_value_category
     FROM orders o
     LEFT JOIN revenue r
     ON o.o_orderkey = r.l_orderkey
 )
 SELECT *
 FROM final
+WHERE o_orderdate >= {{ var("cut_off_date") }}
+--ORDER BY O_totalprice ASC

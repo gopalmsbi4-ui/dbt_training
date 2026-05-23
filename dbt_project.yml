@@ -18,6 +18,10 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
+vars:
+  cut_off_date: TO_DATE('1995-01-01', 'yyyy-MM-dd')  # Example variable for filtering data based on a date
+  high_price_threshold: 1000.00  # Example variable for filtering high-value orders
+
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"

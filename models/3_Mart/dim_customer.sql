@@ -4,6 +4,7 @@ WITH Customer as (
 final as (
     select
         customer_key,
+        {{ format_customer_names('customer_name') }} as customer_name_formatted,
         customer_name,
         market_segment,
         account_balance,
