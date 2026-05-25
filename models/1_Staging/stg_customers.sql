@@ -1,3 +1,9 @@
+{{
+    config(
+        materialized = 'table'
+    )
+}}
+
 WITH source_customer AS (
     SELECT * 
     FROM {{ source('snowflake_sample_data', 'customer') }}

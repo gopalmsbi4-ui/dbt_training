@@ -1,3 +1,8 @@
+{{
+    config(
+        materialized = 'view'
+     )
+}}
 WITH Customer as (
     select * from {{ref("int_customer_geography")}}
 ),
