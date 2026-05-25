@@ -1,5 +1,15 @@
+{{
+    config(
+        materialized = 'incremental',
+        unique_key = 'order_surrogate_key'  
+     )
+}}
 WITH orders AS (
     SELECT * FROM {{ref('Int_orders_with_customers')}}
+
+    {%  if is_incremental() %}
+        WHERE o_orderdate >= (SELECT MAX(o_orderdate) FROM {{ this }})
+    {% endif %}
 )
 , revenue AS (
     SELECT * FROM {{ref('int_order_revenue')}}
