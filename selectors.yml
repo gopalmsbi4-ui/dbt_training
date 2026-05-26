@@ -1,0 +1,24 @@
+selectors:
+  - name: staging_models
+    description: Selector for staging models in the staging models.
+    definition:
+      method: path
+      value: models/1_Staging
+
+  - name: intermediate_models
+    description: Selector for intermediate models in the intermediate models.
+    definition:
+      method: path
+      value: models/2_Intermediate
+
+  - name: customer_models
+    description: Selector for customer models in the customer models.
+    definition:
+      union:
+       - method: fqn
+         value: stg_customers
+       - method: fqn
+         value: Int_orders_with_customers
+       - method: fqn
+         value: dim_customer
+
