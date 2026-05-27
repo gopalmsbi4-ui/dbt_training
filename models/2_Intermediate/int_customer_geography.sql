@@ -1,28 +1,32 @@
-WITH customers as (
-    select * from {{ref("stg_customers")}}
-)
-,nations as (
-    select * from {{ref("stg_nation")}}
+WITH customers AS (
+    SELECT * FROM {{ ref("stg_customers") }}
 ),
-regions as (
-    select * from {{ref("stg_region")}}
+
+nations AS (
+    SELECT * FROM {{ ref("stg_nation") }}
 ),
-final as (
 
-SELECT
-    c.c_custkey as customer_key,
-    c.c_name as customer_name,
-    c.c_mktsegment as market_segment,
-    c.c_acctbal as account_balance,
-    n.n_name AS nation_name,
-    r.r_name AS region_name
+regions AS (
+    SELECT * FROM {{ ref("stg_region") }}
+),
 
-FROM customers c
+final AS (
 
-LEFT JOIN nations n
-    ON c.c_nationkey = n.n_nationkey
+    SELECT
+        c.c_custkey AS customer_key,
+        c.c_name AS customer_name,
+        c.c_mktsegment AS market_segment,
+        c.c_acctbal AS account_balance,
+        n.n_name AS nation_name,
+        r.r_name AS region_name
 
-LEFT JOIN regions r
-    ON n.n_regionkey = r.r_regionkey
+    FROM customers AS c
+
+    LEFT JOIN nations AS n
+        ON c.c_nationkey = n.n_nationkey
+
+    LEFT JOIN regions AS r
+        ON n.n_regionkey = r.r_regionkey
 )
+
 SELECT * FROM final

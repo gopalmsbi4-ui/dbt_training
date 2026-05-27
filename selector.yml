@@ -1,0 +1,36 @@
+selectors:
+  - name: staging
+    description: All staging models under models/1_Staging
+    definition:
+      method: path
+      value: models/1_Staging
+
+  - name: intermediate
+    description: All intermediate models under models/2_Intermediate
+    definition:
+      method: path
+      value: models/2_Intermediate
+
+  - name: marts
+    description: All mart models under models/3_Mart
+    definition:
+      method: path
+      value: models/3_Mart
+
+  - name: seeds
+    description: All project seed files
+    definition:
+      method: path
+      value: seeds
+
+  - name: snapshots
+    description: All project snapshots
+    definition:
+      method: path
+      value: snapshots
+
+  - name: tests
+    description: All singular tests under tests/
+    definition:
+      method: path
+      value: tests

@@ -1,0 +1,42 @@
+name: dbt Snapshots
+
+on:
+  push:
+  schedule:
+    # Run snapshots daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  snapshots:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dbt
+        run: pip install dbt-snowflake
+      
+      - name: Create profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          # Configure your Snowflake connection via GitHub secrets
+      
+      - name: dbt snapshot
+        run: dbt snapshot
+        continue-on-error: true
+      
+      - name: Commit snapshots
+        if: github.event_name == 'schedule'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add snapshots/
+          git commit -m "Update snapshots [skip ci]" || echo "No changes to commit"
+          git push
+        continue-on-error: true

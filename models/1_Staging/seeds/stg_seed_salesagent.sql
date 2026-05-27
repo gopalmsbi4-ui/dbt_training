@@ -1,3 +1,2 @@
-SELECT 
-*
-FROM {{ref('seed_salesagent')}}
+SELECT *
+FROM {{ ref('seed_salesagent') }}

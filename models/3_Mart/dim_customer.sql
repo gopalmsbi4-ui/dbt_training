@@ -1,15 +1,17 @@
-WITH Customer as (
-    select * from {{ref("int_customer_geography")}}
+WITH Customer AS (
+    SELECT * FROM {{ ref("int_customer_geography") }}
 ),
-final as (
-    select
-        customer_key,
-        {{ format_customer_names('customer_name') }} as customer_name_formatted,
-        customer_name,
-        market_segment,
-        account_balance,
-        nation_name,
-        region_name
-    from Customer
+
+Final AS (
+    SELECT
+        Customer_key,
+        {{ format_customer_names('customer_name') }} AS Customer_name_formatted,
+        Customer_name,
+        Market_segment,
+        Account_balance,
+        Nation_name,
+        Region_name
+    FROM Customer
 )
-select * from final
+
+SELECT * FROM Final

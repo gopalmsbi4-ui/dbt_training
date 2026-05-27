@@ -1,9 +1,16 @@
+{{
+    config(
+        materialized='table'
+    )
+}}
+
 WITH source_customer AS (
-    SELECT * 
+    SELECT *
     FROM {{ source('snowflake_sample_data', 'customer') }}
-)
-, final AS (
-    SELECT 
+),
+
+final AS (
+    SELECT
         c_custkey,
         c_name,
         c_address,
@@ -14,4 +21,5 @@ WITH source_customer AS (
         c_comment
     FROM source_customer
 )
+
 SELECT * FROM final
