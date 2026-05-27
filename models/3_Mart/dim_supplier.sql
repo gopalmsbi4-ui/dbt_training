@@ -1,6 +1,7 @@
 WITH supplier AS (
-    SELECT * FROM {{ref("int_supplier_geography")}}
+    SELECT * FROM {{ ref("int_supplier_geography") }}
 ),
+
 final AS (
     SELECT
         supplier_key,
@@ -10,4 +11,5 @@ final AS (
         region_name
     FROM supplier
 )
+
 SELECT * FROM final

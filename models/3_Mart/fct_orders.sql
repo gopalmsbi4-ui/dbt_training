@@ -5,17 +5,19 @@
      )
 }}
 WITH orders AS (
-    SELECT * FROM {{ref('Int_orders_with_customers')}}
+    SELECT * FROM {{ ref('Int_orders_with_customers') }}
 
-    {%  if is_incremental() %}
+    {% if is_incremental() %}
         WHERE o_orderdate >= (SELECT MAX(o_orderdate) FROM {{ this }})
     {% endif %}
-)
-, revenue AS (
-    SELECT * FROM {{ref('int_order_revenue')}}
-)
-,final AS (
-    SELECT 
+),
+
+revenue AS (
+    SELECT * FROM {{ ref('int_order_revenue') }}
+),
+
+final AS (
+    SELECT
         {{ generate_order_surrogate_key('o.o_orderkey', 'o.c_custkey') }} AS order_surrogate_key,
         o.o_orderkey,
         o.o_orderdate,
@@ -33,14 +35,15 @@ WITH orders AS (
         r.gross_revenue,
         r.discount_amount,
         r.net_revenue,
-        case 
-            when o.o_totalprice >= {{ var("high_price_threshold") }} then 'High Value'
-            else 'Regular Value'
-            end as order_value_category
-    FROM orders o
-    LEFT JOIN revenue r
-    ON o.o_orderkey = r.l_orderkey
+        CASE
+            WHEN o.o_totalprice >= {{ var("high_price_threshold") }} THEN 'High Value'
+            ELSE 'Regular Value'
+        END AS order_value_category
+    FROM orders AS o
+    LEFT JOIN revenue AS r
+        ON o.o_orderkey = r.l_orderkey
 )
+
 SELECT *
 FROM final
 WHERE o_orderdate >= {{ var("cut_off_date") }}
