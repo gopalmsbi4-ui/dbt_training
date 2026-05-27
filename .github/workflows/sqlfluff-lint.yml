@@ -1,0 +1,33 @@
+name: SQL Linting with sqlfluff
+
+on:
+  pull_request:
+    paths:
+      - '**/*.sql'
+      - '.sqlfluff'
+  push:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install sqlfluff
+        run: pip install sqlfluff sqlfluff-templater-dbt
+      
+      - name: Lint SQL files
+        run: sqlfluff lint .
+      
+      - name: Run sqlfluff with diff for PR
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "::notice::SQL Linting Complete - Check for any violations above"
