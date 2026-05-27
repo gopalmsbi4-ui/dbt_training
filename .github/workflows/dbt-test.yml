@@ -25,7 +25,9 @@ jobs:
       - name: Install dbt and dependencies
         run: |
           pip install dbt-snowflake
-          pip install dbt-utils
+
+      - name: Install dbt packages
+        run: dbt deps
       
       - name: Create profiles.yml
         run: |
