@@ -1,0 +1,38 @@
+name: Generate dbt Documentation
+
+on:
+  push:
+    paths:
+      - 'models/**'
+      - '**.yml'
+      - 'README.md'
+
+jobs:
+  dbt-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dbt
+        run: pip install dbt-snowflake
+      
+      - name: dbt parse
+        run: dbt parse
+        continue-on-error: true
+      
+      - name: dbt docs generate
+        run: dbt docs generate
+        continue-on-error: true
+      
+      - name: Upload documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-docs
+          path: target/
+          retention-days: 30
