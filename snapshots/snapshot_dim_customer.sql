@@ -10,7 +10,7 @@
 }}
 
 SELECT
-   * ,
+    *,
 
     CURRENT_TIMESTAMP AS updated_at
 

@@ -1,7 +1,7 @@
-SELECT 
-o_orderkey,
-count(*) as order_count
-FROM 
-{{ ref('fct_orders') }}
+SELECT
+    o_orderkey,
+    count(*) AS order_count
+FROM
+    {{ ref('fct_orders') }}
 GROUP BY o_orderkey
-HAVING count(*) >1
+HAVING count(*) > 1
