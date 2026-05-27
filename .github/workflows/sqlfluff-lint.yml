@@ -6,9 +6,6 @@ on:
       - '**/*.sql'
       - '.sqlfluff'
   push:
-    paths:
-      - '**/*.sql'
-      - '.sqlfluff'
 
 jobs:
   lint:
